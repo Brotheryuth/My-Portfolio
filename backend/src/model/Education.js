@@ -1,13 +1,13 @@
-const mongeese = require('mongoose')
-const educationSchema = new mongeese.Schema({
+const mongoose = require('mongoose')
+const educationSchema = new mongoose.Schema({
     institution:{
         type:String,
-        require:[true,' School/Universy name is require'],
+        required:[true,'School/University name is required'],
         trim:true
     },
     level:{
         type:String ,
-        require:[true , 'Education level is required'],
+        required:[true , 'Education level is required'],
         enum:['Primary School' , 'Secondary School', 'High School','University' , 'Other'],
         trim:true
     },
@@ -23,11 +23,11 @@ const educationSchema = new mongeese.Schema({
     },
     startDate:{
         type:String,
-        require:[true, 'Start date is required'],
+        required:[true, 'Start date is required'],
     },
     endDate:{
         type:String,
-        require:[true, 'End date is required']
+        required:[true, 'End date is required']
     },
     description:{
         type:String ,
@@ -35,5 +35,5 @@ const educationSchema = new mongeese.Schema({
         trim:true
     }
 })
-const education = mongeese.model('EducationSchema', educationSchema );
+const education = mongoose.model('Education', educationSchema );
 module.exports = education;

@@ -1,8 +1,8 @@
-const mongeese = require('mongoose')
-const userSkillSchema = new mongeese.Schema({
-  name:{type:String , require:[true,'Skill name is required'], trim:true }, 
-  skillLevel :{type:Number, require:[true,'skill level is required'] , min : 0 , max : 100},
-  category:{ type:String , require:[true , 'skill category is required '] , enum:[frontend, backend, Database , tool]},
+const mongoose = require('mongoose')
+const userSkillSchema = new mongoose.Schema({
+  name:{type:String , required:[true,'Skill name is required'], trim:true }, 
+  skillLevel :{type:Number, required:[true,'skill level is required'] , min : 0 , max : 100},
+  category:{ type:String , required:[true , 'skill category is required '] , enum:['Frontend', 'Backend', 'Database' , 'Tools']},
 })
-const userSkill = mongeese.model('UserSkillSchema',userSkillSchema);
+const userSkill = mongoose.model('UserSkill',userSkillSchema);
 module.exports = userSkill;
