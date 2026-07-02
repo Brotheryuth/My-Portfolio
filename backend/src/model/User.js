@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     userName:{
         type:String,
-        require:[true,'User name is required'],
+        required:[true,'User name is required'],
         trim:true,   
     },
     userTitle:{
         type:String,
-        require:[true,'User title is required'],
+        required:[true,'User title is required'],
         trim:true
     },
     bio:{
@@ -16,31 +16,31 @@ const userSchema = new mongoose.Schema({
     },
     userMajor:{
         type:[String],
-        require:[true,'Major is required'],
+        required:[true,'Major is required'],
         trim:true,
         default: []
     },
     userEmail:{
         type:String,
-        require:[true,'Email is required'],
+        required:[true,'Email is required'],
         trim:true
     },
     userPhoneNumber:{
         type:String,
-        require:[true,'Phone number is required']
+        required:[true,'Phone number is required']
     },
     aboutMe:{
         type:String,
-        requie:[true,'Information about you is required'],
+        required:[true,'Information about you is required'],
         trim:true
     },
     gitHubUrl:{
         type:String,
-        require:[true,'Github link is required']
+        required:[true,'Github link is required']
     },
     avatarUrl:{
         type:String,
-        require:[true,'avatar url is required']
+        required:[true,'avatar url is required']
     },
 
     createAt:{
@@ -48,5 +48,5 @@ const userSchema = new mongoose.Schema({
         default:Date.now
     }
 })
-const  user = mongoose.model('UserSchema', userSchema);
+const user = mongoose.model('User', userSchema);
 module.exports = user;

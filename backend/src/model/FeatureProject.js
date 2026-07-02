@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const featureProjectSchema =new  mongoose.Schema({
-    projectNmae:{
+    projectName:{
         type:String,
-        require:[true , 'Project tittle is required'],
+        required:[true , 'Project title is required'],
         trim:true,
     },
     projectDescription:{
         type:String,
-        require:'Project description is required'
+        required:[true,'Project description is required']
     },
     technologyUsed:{
         type: [String] , // array 
@@ -15,12 +15,12 @@ const featureProjectSchema =new  mongoose.Schema({
     },
     developPeriod:{
         type: String,
-        require:'Development period time is required'
+        required:[true,'Development period time is required']
     },
     projectUrl:{
         type:String,
         trim:true,
-        require:'Project url is required'
+        required:[true,'Project url is required']
     },
     githubUrl:{
         type:String,
@@ -35,8 +35,8 @@ const featureProjectSchema =new  mongoose.Schema({
         default:false
     },
     challenge:{
-        type:int,
-        
+        type:String,
+        trim:true
     },
     problem:{
         type:String,
