@@ -110,9 +110,9 @@ function Home() {
               <Link to="/projects" className="col-action-btn outline-col-btn">
                 PROJECTS
               </Link>
-              <a href="mailto:lyserakyuth06@gmail.com" className="col-action-btn solid-col-btn">
+              <Link to="/about#contact" className="col-action-btn solid-col-btn">
                 HIRE ME
-              </a>
+              </Link>
             </div>
           </section>
 

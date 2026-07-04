@@ -85,7 +85,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 8px;
   margin-bottom: 25px;
@@ -364,7 +364,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-transform: uppercase;
 }
 
@@ -374,7 +374,7 @@
   padding: 14px 16px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  background-color: transparent;
+  background-color: var(--bg-card);
   color: var(--text-primary);
   font-size: 0.95rem;
   box-sizing: border-box;
@@ -382,11 +382,18 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.contact-form-group input::placeholder,
+.contact-form-group textarea::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 1 !important;
+}
+
 .contact-form-group input:focus,
 .contact-form-group textarea:focus {
   border-color: var(--text-primary);
   background-color: var(--bg-card);
   outline: none;
+  box-shadow: 0 0 0 1px var(--text-primary);
 }
 
 .contact-submit-btn {
@@ -416,24 +423,48 @@
   cursor: not-allowed;
 }
 
-.contact-form-success {
-  padding: 12px 16px;
-  background-color: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.2);
+/* Viewport-level Sliding Alerts */
+.contact-alert {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  padding: 16px 24px;
   border-radius: 8px;
-  color: #22c55e;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  z-index: 2500;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
-.contact-form-error {
-  padding: 12px 16px;
+.success-alert {
+  background-color: rgba(34, 197, 94, 0.08);
+  border: 1px solid #22c55e;
+  color: #22c55e;
+}
+
+.error-alert {
   background-color: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: 8px;
+  border: 1px solid #ef4444;
   color: #ef4444;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  text-align: center;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-alert {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
 }

@@ -86,6 +86,21 @@ function About() {
     };
   }, [loading]);
 
+  // Handle smooth scrolling to #contact hash on load/route change
+  useEffect(() => {
+    if (loading) return;
+    
+    if (window.location.hash === '#contact') {
+      const timer = setTimeout(() => {
+        const contactSec = document.getElementById('contact');
+        if (contactSec) {
+          contactSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, window.location.hash]);
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
     setFormLoading(true);
@@ -95,9 +110,11 @@ function About() {
       await messageService.addMessage(contactForm);
       setFormSuccess('Thank you! Your message has been sent successfully.');
       setContactForm({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setFormSuccess(''), 4000);
     } catch (err) {
       console.error(err);
       setFormError('Failed to send message. Please try again later.');
+      setTimeout(() => setFormError(''), 4000);
     } finally {
       setFormLoading(false);
     }
@@ -107,6 +124,9 @@ function About() {
 
   return (
     <div className="about-page-container">
+      {/* Sliding Alert Notifications */}
+      {formSuccess && <div className="contact-alert success-alert">{formSuccess}</div>}
+      {formError && <div className="contact-alert error-alert">{formError}</div>}
       {/* Profile Section */}
       <section className="about-profile-section">
         <div className="about-profile-grid">
@@ -190,13 +210,11 @@ function About() {
       </section>
 
       {/* Contact Section */}
-      <section className="about-contact-section">
+      <section id="contact" className="about-contact-section">
         <h2 className="section-title-alt">GET IN TOUCH</h2>
         <p className="contact-section-desc">Have a question or want to work together? Send me a message below!</p>
         
         <form onSubmit={handleSendMessage} className="about-contact-form">
-          {formSuccess && <div className="contact-form-success">{formSuccess}</div>}
-          {formError && <div className="contact-form-error">{formError}</div>}
           
           <div className="contact-form-row">
             <div className="contact-form-group">
