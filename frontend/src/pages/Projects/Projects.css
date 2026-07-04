@@ -167,6 +167,7 @@
   color: var(--text-secondary);
   margin: 0 0 20px 0;
   flex-grow: 1; /* push tags & footer to bottom */
+  text-align: justify;
 }
 
 .project-tech-tags {
@@ -353,6 +354,7 @@
   line-height: 1.6;
   color: var(--text-primary);
   margin: 0;
+  text-align: justify;
 }
 
 .modal-tech-list {

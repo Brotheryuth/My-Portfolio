@@ -51,6 +51,7 @@
   line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
+  text-align: justify;
 }
 
 .about-actions-wrapper {
@@ -147,6 +148,7 @@
   line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
+  text-align: justify;
 }
 
 .strengths-grid {
@@ -305,6 +307,7 @@
   line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
+  text-align: justify;
 }
 
 @keyframes fadeUp {

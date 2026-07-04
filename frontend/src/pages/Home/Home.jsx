@@ -57,7 +57,7 @@ function Home() {
           <h1 className="greeting-heading">Hello!</h1>
           
           <div className="bio-area">
-            <p>{profile?.bio || profile?.aboutMe}</p>
+            <p>{profile?.bio }</p>
             <p>Hope you enjoy my portfolio!</p>
           </div>
 
