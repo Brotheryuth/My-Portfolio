@@ -91,16 +91,31 @@ function Home() {
             </div>
           </section>
 
+          {/* Text-based Projects Section (Horizontal inside right column) */}
           <section className="info-block">
             <h2 className="info-block-title">PROJECTS</h2>
-            <div className="projects-list">
-              {projects.slice(0,2).map((proj) => (
-                <ProjectCard key={proj._id} project={proj} />
+            <div className="homepage-projects-horizontal-list">
+              {projects.slice(0, 2).map((proj) => (
+                <Link key={proj._id} to="/projects" className="homepage-project-text-item">
+                  <span className="project-time">{proj.developPeriod}</span>
+                  <h4 className="project-name">{proj.projectName}</h4>
+                </Link>
               ))}
+              <Link to="/projects" className="homepage-project-text-item project-more-item">
+                <span className="project-time">EXPLORE</span>
+                <h4 className="project-name">MORE &rarr;</h4>
+              </Link>
             </div>
-            <Link to="/projects" className="explore-projects-link">
-              Explore All Projects <span className="arrow">&rarr;</span>
-            </Link>
+
+            {/* Action Buttons in Right Column */}
+            <div className="homepage-column-actions">
+              <Link to="/projects" className="col-action-btn outline-col-btn">
+                PROJECTS
+              </Link>
+              <a href="mailto:lyserakyuth06@gmail.com" className="col-action-btn solid-col-btn">
+                HIRE ME
+              </a>
+            </div>
           </section>
 
         </div>

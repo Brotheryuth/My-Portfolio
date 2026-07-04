@@ -259,30 +259,117 @@ body.dark-mode .skill-icon-card[title="git" i] .skill-svg-icon {
   filter: brightness(0) invert(1);
 }
 
-.explore-projects-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: color 0.25s ease;
-  width: fit-content;
+/* Horizontal Projects List inside Right Column */
+.homepage-projects-horizontal-list {
+  display: flex;
+  gap: 16px;
+  margin-top: 5px;
 }
 
-.explore-projects-link:hover {
+.homepage-project-text-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  border-left: 2px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  box-sizing: border-box;
+}
+
+.project-more-item {
+  border-left: 2px dashed var(--border-color);
+}
+
+.project-more-item:hover {
+  border-left-style: solid;
+}
+
+.homepage-project-text-item:hover {
+  border-left-color: var(--text-primary);
+  background-color: var(--bg-card);
+  transform: translateX(4px);
+}
+
+.homepage-project-text-item .project-time {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.homepage-project-text-item .project-name {
+  font-family: var(--font-family-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Slide-in arrow indicator on hover */
+.homepage-project-text-item .project-name::after {
+  content: ' →';
+  opacity: 0;
+  display: inline-block;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  font-family: var(--font-family-sans);
+}
+
+.homepage-project-text-item:hover .project-name::after {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Call to Actions inside Right Column */
+.homepage-column-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.col-action-btn {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.outline-col-btn {
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  background-color: transparent;
+}
+
+.outline-col-btn:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-main);
+}
+
+.solid-col-btn {
+  background-color: var(--text-primary);
+  color: var(--bg-main);
+  border: 1px solid var(--text-primary);
+}
+
+.solid-col-btn:hover {
+  background-color: transparent;
   color: var(--text-primary);
 }
 
-.explore-projects-link .arrow {
-  display: inline-block;
-  transition: transform 0.25s ease;
-}
-
-.explore-projects-link:hover .arrow {
-  transform: translateX(4px);
+@media (max-width: 480px) {
+  .homepage-projects-horizontal-list {
+    flex-direction: column;
+    gap: 15px;
+  }
 }
