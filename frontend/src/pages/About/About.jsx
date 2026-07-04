@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { userService } from '../../services/user.service';
 import { educationService } from '../../services/education.service';
+import { messageService } from '../../services/message.service';
 import './About.css';
 
 function About() {
   const [profile, setProfile] = useState(null);
   const [education, setEducation] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Contact Form States
+  const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formLoading, setFormLoading] = useState(false);
+  const [formSuccess, setFormSuccess] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +43,7 @@ function About() {
     fetchData();
   }, []);
 
-  // Butter-smooth scroll animation using requestAnimationFrame and direct DOM updates
+  
   useEffect(() => {
     if (loading) return;
 
@@ -50,7 +57,7 @@ function About() {
       const rect = timeline.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Middle of the screen is the trigger focus point
+      
       const focusPoint = windowHeight / 2;
       const totalHeight = rect.height;
       const distanceFromTop = focusPoint - rect.top;
@@ -79,10 +86,47 @@ function About() {
     };
   }, [loading]);
 
+  // Handle smooth scrolling to #contact hash on load/route change
+  useEffect(() => {
+    if (loading) return;
+    
+    if (window.location.hash === '#contact') {
+      const timer = setTimeout(() => {
+        const contactSec = document.getElementById('contact');
+        if (contactSec) {
+          contactSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, window.location.hash]);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormError('');
+    setFormSuccess('');
+    try {
+      await messageService.addMessage(contactForm);
+      setFormSuccess('Thank you! Your message has been sent successfully.');
+      setContactForm({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setFormSuccess(''), 4000);
+    } catch (err) {
+      console.error(err);
+      setFormError('Failed to send message. Please try again later.');
+      setTimeout(() => setFormError(''), 4000);
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
   if (loading) return <div className="loading-state">Loading...</div>;
 
   return (
     <div className="about-page-container">
+      {/* Sliding Alert Notifications */}
+      {formSuccess && <div className="contact-alert success-alert">{formSuccess}</div>}
+      {formError && <div className="contact-alert error-alert">{formError}</div>}
       {/* Profile Section */}
       <section className="about-profile-section">
         <div className="about-profile-grid">
@@ -94,9 +138,19 @@ function About() {
           <div className="about-info-wrapper">
             <h1 className="about-name">{profile?.userName?.toUpperCase() || 'ABOUT ME'}</h1>
             <p className="about-bio">{profile?.aboutMe}</p>
-            <a href="/resume.pdf" download className="download-cv-btn">
-              DOWNLOAD CV (PDF)
-            </a>
+            
+            <div className="about-actions-wrapper">
+              <a href="/resume.pdf" download className="download-cv-btn">
+                DOWNLOAD CV (PDF)
+              </a>
+              {profile.gitHubUrl && (
+                <a href={profile.gitHubUrl} target="_blank" rel="noreferrer" className="about-github-btn" aria-label="GitHub" title="GitHub Profile">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -163,6 +217,69 @@ function About() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="about-contact-section">
+        <h2 className="section-title-alt">GET IN TOUCH</h2>
+        <p className="contact-section-desc">Have a question or want to work together? Send me a message below!</p>
+        
+        <form onSubmit={handleSendMessage} className="about-contact-form">
+          
+          <div className="contact-form-row">
+            <div className="contact-form-group">
+              <label htmlFor="contact-name">Name</label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                placeholder="Your Name" 
+                value={contactForm.name} 
+                onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                required 
+              />
+            </div>
+            
+            <div className="contact-form-group">
+              <label htmlFor="contact-email">Email</label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                placeholder="Your Email" 
+                value={contactForm.email} 
+                onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                required 
+              />
+            </div>
+          </div>
+          
+          <div className="contact-form-group">
+            <label htmlFor="contact-subject">Subject</label>
+            <input 
+              type="text" 
+              id="contact-subject" 
+              placeholder="Topic or Project Type" 
+              value={contactForm.subject} 
+              onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
+              required 
+            />
+          </div>
+          
+          <div className="contact-form-group">
+            <label htmlFor="contact-message">Message</label>
+            <textarea 
+              id="contact-message" 
+              rows="5" 
+              placeholder="Your Message..." 
+              value={contactForm.message} 
+              onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+              required 
+            />
+          </div>
+          
+          <button type="submit" className="contact-submit-btn" disabled={formLoading}>
+            {formLoading ? 'SENDING...' : 'SEND MESSAGE'}
+          </button>
+        </form>
       </section>
     </div>
   );
