@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { userService } from '../../services/user.service';
 import { educationService } from '../../services/education.service';
+import { messageService } from '../../services/message.service';
 import './About.css';
 
 function About() {
   const [profile, setProfile] = useState(null);
   const [education, setEducation] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Contact Form States
+  const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formLoading, setFormLoading] = useState(false);
+  const [formSuccess, setFormSuccess] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +85,23 @@ function About() {
       window.removeEventListener('resize', handleScroll);
     };
   }, [loading]);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormError('');
+    setFormSuccess('');
+    try {
+      await messageService.addMessage(contactForm);
+      setFormSuccess('Thank you! Your message has been sent successfully.');
+      setContactForm({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      setFormError('Failed to send message. Please try again later.');
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   if (loading) return <div className="loading-state">Loading...</div>;
 
@@ -163,6 +187,71 @@ function About() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="about-contact-section">
+        <h2 className="section-title-alt">GET IN TOUCH</h2>
+        <p className="contact-section-desc">Have a question or want to work together? Send me a message below!</p>
+        
+        <form onSubmit={handleSendMessage} className="about-contact-form">
+          {formSuccess && <div className="contact-form-success">{formSuccess}</div>}
+          {formError && <div className="contact-form-error">{formError}</div>}
+          
+          <div className="contact-form-row">
+            <div className="contact-form-group">
+              <label htmlFor="contact-name">Name</label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                placeholder="Your Name" 
+                value={contactForm.name} 
+                onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                required 
+              />
+            </div>
+            
+            <div className="contact-form-group">
+              <label htmlFor="contact-email">Email</label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                placeholder="Your Email" 
+                value={contactForm.email} 
+                onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                required 
+              />
+            </div>
+          </div>
+          
+          <div className="contact-form-group">
+            <label htmlFor="contact-subject">Subject</label>
+            <input 
+              type="text" 
+              id="contact-subject" 
+              placeholder="Topic or Project Type" 
+              value={contactForm.subject} 
+              onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
+              required 
+            />
+          </div>
+          
+          <div className="contact-form-group">
+            <label htmlFor="contact-message">Message</label>
+            <textarea 
+              id="contact-message" 
+              rows="5" 
+              placeholder="Your Message..." 
+              value={contactForm.message} 
+              onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+              required 
+            />
+          </div>
+          
+          <button type="submit" className="contact-submit-btn" disabled={formLoading}>
+            {formLoading ? 'SENDING...' : 'SEND MESSAGE'}
+          </button>
+        </form>
       </section>
     </div>
   );
