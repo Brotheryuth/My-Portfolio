@@ -100,6 +100,11 @@ function Projects() {
             style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => setSelectedProject(proj)}
           >
+            {proj.projectImage && (
+              <div className="project-card-image-wrapper">
+                <img src={proj.projectImage} alt={proj.projectName} className="project-card-img" />
+              </div>
+            )}
             <div className="project-card-header">
               <span className="project-period">{proj.developPeriod}</span>
               <h3 className="project-title">{proj.projectName}</h3>
@@ -140,6 +145,12 @@ function Projects() {
           <div className="project-details-modal" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal-btn" onClick={() => setSelectedProject(null)}>&times;</button>
             
+            {selectedProject.projectImage && (
+              <div className="modal-image-wrapper">
+                <img src={selectedProject.projectImage} alt={selectedProject.projectName} className="modal-project-img" />
+              </div>
+            )}
+
             <div className="modal-header">
               <span className="modal-period">{selectedProject.developPeriod}</span>
               <h2 className="modal-project-title">{selectedProject.projectName}</h2>

@@ -22,6 +22,10 @@ const featureProjectSchema =new  mongoose.Schema({
         trim:true,
         required:[true,'Project url is required']
     },
+    projectImage:{
+        type:String,
+        default:''
+    },
     githubUrl:{
         type:String,
         trim:true,
