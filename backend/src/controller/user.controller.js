@@ -94,7 +94,7 @@ const updateUserInfo = async (req, res) => {
     const updateUser = await user.findByIdAndUpdate(
       getID,
       { $set: updateData },
-      { new: true, runValidators: true },
+      { returnDocument: 'after', runValidators: true },
     );
 
     if (!updateUser) {

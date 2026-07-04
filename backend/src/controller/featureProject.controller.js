@@ -67,7 +67,7 @@ const updateProject = async (req, res) => {
   const { id } = req.params;
   const { _id, ...UPDATE_DATA } = req.body;
   try {
-    const UPDATE_PROJECT = await featureProject.findByIdAndUpdate(id, UPDATE_DATA, { new: true, runValidators: true });
+    const UPDATE_PROJECT = await featureProject.findByIdAndUpdate(id, UPDATE_DATA, { returnDocument: 'after', runValidators: true });
     if (!UPDATE_PROJECT) {
       return res.status(404).json({ message: 'Project to update not found' });
     }

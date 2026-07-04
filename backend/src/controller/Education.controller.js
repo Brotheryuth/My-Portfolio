@@ -48,7 +48,7 @@ const updateEducation = async (req, res) => {
   const updateData = req.body;
   try {
     const updatedData = await education.findByIdAndUpdate(id, updateData, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!updatedData) {

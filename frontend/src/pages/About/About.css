@@ -433,7 +433,7 @@
   font-size: 0.9rem;
   font-weight: 700;
   z-index: 2500;
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: alertPop 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
@@ -450,14 +450,22 @@
   color: #ef4444;
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(50px);
+@keyframes alertPop {
+  0% {
+    transform: translateX(120%);
     opacity: 0;
   }
-  to {
+  10% {
     transform: translateX(0);
     opacity: 1;
+  }
+  90% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
   }
 }
 
@@ -466,5 +474,25 @@
     left: 20px;
     right: 20px;
     top: 20px;
+    animation: alertPopMobile 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes alertPopMobile {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
   }
 }

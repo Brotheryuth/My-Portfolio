@@ -44,7 +44,7 @@ const updateSkill = async (req, res) => {
   const { id } = req.params;
   const { _id, ...updateinfo } = req.body;
   try {
-    const newInfo = await userSkill.findByIdAndUpdate(id, updateinfo, { new: true, runValidators: true });
+    const newInfo = await userSkill.findByIdAndUpdate(id, updateinfo, { returnDocument: 'after', runValidators: true });
     
     if (!newInfo) {
       return res.status(404).json({message:'Skill not found'})

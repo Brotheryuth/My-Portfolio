@@ -6,7 +6,8 @@ function ProfileTab({ profile, onRefresh, triggerAlert }) {
     userName: '',
     email: '',
     aboutMe: '',
-    avatarUrl: ''
+    avatarUrl: '',
+    bio: ''
   });
 
   useEffect(() => {
@@ -15,7 +16,8 @@ function ProfileTab({ profile, onRefresh, triggerAlert }) {
         userName: profile.userName || '',
         email: profile.email || '',
         aboutMe: profile.aboutMe || '',
-        avatarUrl: profile.avatarUrl || ''
+        avatarUrl: profile.avatarUrl || '',
+        bio: profile.bio || ''
       });
     }
   }, [profile]);
@@ -69,6 +71,16 @@ function ProfileTab({ profile, onRefresh, triggerAlert }) {
             onChange={(e) => setProfileForm({ ...profileForm, avatarUrl: e.target.value })}
             placeholder="https://..."
           />
+        </div>
+
+        <div className="form-group">
+          <label>Homepage Description</label>
+          <textarea 
+            rows="3" 
+            value={profileForm.bio} 
+            onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
+            placeholder="A short introduction shown on your homepage..."
+          ></textarea>
         </div>
 
         <div className="form-group">
