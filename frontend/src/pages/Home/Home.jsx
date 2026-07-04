@@ -80,7 +80,7 @@ function Home() {
             <h2 className="info-block-title">SKILLS</h2>
             <div className="skills-icon-grid">
               {skills.slice(0, 5).map((skill) => (
-                <SkillBadge key={skill._id} name={skill.name} />
+                <SkillBadge key={skill._id} name={skill.name} icon={skill.icon} />
               ))}
               <Link to="/skills" className="skill-icon-card view-all-skills-card" title="Explore All Skills">
                 <div className="view-all-content">

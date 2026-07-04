@@ -10,14 +10,15 @@ function SkillsTab({ skills, onRefresh, triggerAlert }) {
   const [skillForm, setSkillForm] = useState({
     name: '',
     skillLevel: 80,
-    category: 'Frontend'
+    category: 'Frontend',
+    icon: ''
   });
 
   const resetForm = () => {
     setShowModal(false);
     setEditMode(false);
     setEditId(null);
-    setSkillForm({ name: '', skillLevel: 80, category: 'Frontend' });
+    setSkillForm({ name: '', skillLevel: 80, category: 'Frontend', icon: '' });
   };
 
   const handleOpenModal = (skill = null) => {
@@ -27,7 +28,8 @@ function SkillsTab({ skills, onRefresh, triggerAlert }) {
       setSkillForm({
         name: skill.name || '',
         skillLevel: skill.skillLevel || 80,
-        category: skill.category || 'Frontend'
+        category: skill.category || 'Frontend',
+        icon: skill.icon || ''
       });
     } else {
       setEditMode(false);
@@ -137,6 +139,16 @@ function SkillsTab({ skills, onRefresh, triggerAlert }) {
                     required 
                   />
                 </div>
+              </div>
+
+              <div className="form-group">
+                <label>Icon URL (S3, Devicon SVG, or image link)</label>
+                <input 
+                  type="url" 
+                  placeholder="https://..." 
+                  value={skillForm.icon} 
+                  onChange={(e) => setSkillForm({ ...skillForm, icon: e.target.value })}
+                />
               </div>
 
               <button type="submit" className="btn btn-modal-submit">

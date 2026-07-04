@@ -14,8 +14,8 @@ function Notfound() {
           />
           <h1 className="nf-code">404</h1>
           <p className="nf-message">
-            Whoa there!This page <span className="nf-message-span">doesn't exist.</span>
-            How about you grab a cup of tea and head back home?
+            Whoa there! This page <span className="nf-message-span">doesn't exist</span>
+            . How about you grab a cup of tea and head back home?
           </p>
           <Link to="/" className="nf-btn">Back Home</Link>
         </div>

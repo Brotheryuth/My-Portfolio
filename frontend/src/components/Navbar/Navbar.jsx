@@ -38,9 +38,9 @@ function Navbar() {
       
       <div className="navbar-navigation-links">
         <Link to="/" className="navbar-link">HOME</Link>
-        <Link to="/about" className="navbar-link">ABOUT</Link>
         <Link to="/skills" className="navbar-link">SKILLS</Link>
         <Link to="/projects" className="navbar-link">PROJECTS</Link>
+        <Link to="/about" className="navbar-link">ABOUT</Link>
       </div>
       
       <div className="navbar-actions">

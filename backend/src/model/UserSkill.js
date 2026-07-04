@@ -16,6 +16,11 @@ const userSkillSchema = new mongoose.Schema({
     required: [true, "skill category is required "],
     enum: ["Frontend", "Backend", "Database", "Tools","Languages"],
   },
+  icon: {
+    type: String,
+    default: "",
+    trim: true
+  }
 });
 const userSkill = mongoose.model("UserSkill", userSkillSchema);
 module.exports = userSkill;
