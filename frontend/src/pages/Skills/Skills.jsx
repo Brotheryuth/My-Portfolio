@@ -55,7 +55,7 @@ function Skills() {
                 {categorySkills.map((skill) => (
                   <div key={skill._id} className="skill-detail-card">
                     <div className="skill-card-badge-wrapper">
-                      <SkillBadge name={skill.name} />
+                      <SkillBadge name={skill.name} icon={skill.icon} />
                     </div>
                     <div className="skill-card-info">
                       <h3 className="skill-card-name">{skill.name}</h3>

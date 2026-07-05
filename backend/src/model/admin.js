@@ -13,7 +13,7 @@ adminSchema.pre("save", async function () {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   } catch (e) {
-    throw e; // Mongoose will catch this throw and pass it to the controller
+    throw e;
   }
 });
 // helper method use to compare password during log in

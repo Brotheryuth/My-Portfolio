@@ -171,6 +171,13 @@ function Projects() {
                 <p>{selectedProject.projectDescription}</p>
               </div>
 
+              {selectedProject.contribution && (
+                <div className="modal-section">
+                  <h3>Individual Contribution</h3>
+                  <p>{selectedProject.contribution}</p>
+                </div>
+              )}
+
               {selectedProject.challenge && (
                 <div className="modal-section">
                   <h3>Challenges Faced</h3>

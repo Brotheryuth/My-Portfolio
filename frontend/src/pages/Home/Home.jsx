@@ -78,10 +78,12 @@ function Home() {
           
           <section id="skills" className="info-block">
             <h2 className="info-block-title">SKILLS</h2>
-            <div className="skills-icon-grid">
-              {skills.slice(0, 5).map((skill) => (
-                <SkillBadge key={skill._id} name={skill.name} />
-              ))}
+            <div className="skills-row-layout">
+              <div className="skills-scroll-wrapper">
+                {skills.map((skill) => (
+                  <SkillBadge key={skill._id} name={skill.name} icon={skill.icon} />
+                ))}
+              </div>
               <Link to="/skills" className="skill-icon-card view-all-skills-card" title="Explore All Skills">
                 <div className="view-all-content">
                   <span className="view-all-symbol">&rarr;</span>

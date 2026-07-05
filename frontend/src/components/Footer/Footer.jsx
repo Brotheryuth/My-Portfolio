@@ -65,9 +65,7 @@ function Footer() {
         <p className="footer-copyright">
           &copy; {new Date().getFullYear()} {profile.userName || 'Ly Serakyuth'}. All rights reserved.
         </p>
-        <p className="footer-design-by">
-          Designed & Engineered with clean architecture.
-        </p>
+      
       </div>
     </footer>
   );
