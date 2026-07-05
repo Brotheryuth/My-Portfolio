@@ -18,6 +18,24 @@
   text-decoration: none;
   color: var(--text-primary);
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  min-width: 160px; 
+}
+
+.brand-static {
+  white-space: nowrap;
+}
+
+.brand-dynamic {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid var(--text-primary);
+  white-space: nowrap;
+  width: 0;
+  animation: 
+    typing 4s steps(4, end) infinite,
+    blink-caret 0.75s step-end infinite;
 }
 
 .navbar-navigation-links {
@@ -78,6 +96,14 @@
   transform: scale(1.05);
 }
 
+.header-theme-btn {
+  display: none !important;
+}
+
+.menu-theme-btn {
+  display: flex !important;
+}
+
 .profile-nav-link {
   display: flex;
   align-items: center;
@@ -100,6 +126,11 @@
   color: var(--error-color);
 }
 
+.navbar-header {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-toggle-btn {
   display: none;
 }
@@ -115,7 +146,17 @@
 @media (max-width: 768px) {
   .navbar-container {
     padding: 15px 24px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .navbar-toggle-btn {
@@ -155,32 +196,27 @@
   .navbar-menu-wrapper {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: var(--bg-main);
-    border-bottom: 1px solid var(--border-color);
-    padding: 30px 24px;
-    gap: 30px;
-    box-sizing: border-box;
-    transform: translateY(-160%);
+    max-height: 0;
     opacity: 0;
+    overflow: hidden;
     pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-    z-index: 99;
+    margin-top: 0;
+    padding: 0;
+    gap: 24px;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
   }
 
   .navbar-menu-wrapper.active {
-    transform: translateY(0);
+    max-height: 400px;
     opacity: 1;
+    margin-top: 24px;
     pointer-events: all;
   }
 
   .navbar-navigation-links {
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
     width: 100%;
   }
 
@@ -188,7 +224,21 @@
     justify-content: center;
     width: 100%;
     border-top: 1px solid var(--border-color);
-    padding-top: 24px;
-    gap: 24px;
+    padding-top: 20px;
+    gap: 20px;
+  }
+
+  .navbar-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-theme-btn {
+    display: flex !important;
+  }
+
+  .menu-theme-btn {
+    display: none !important;
   }
 }
