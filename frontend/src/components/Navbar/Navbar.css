@@ -100,18 +100,95 @@
   color: var(--error-color);
 }
 
+.navbar-toggle-btn {
+  display: none;
+}
+
+.navbar-menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 60px;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
-    padding: 15px 20px;
-    flex-direction: column;
-    gap: 15px;
+    padding: 15px 24px;
+    position: relative;
   }
-  
+
+  .navbar-toggle-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+    outline: none;
+  }
+
+  .navbar-toggle-btn .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 2px;
+  }
+
+  .navbar-toggle-btn.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .navbar-toggle-btn.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle-btn.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--border-color);
+    padding: 30px 24px;
+    gap: 30px;
+    box-sizing: border-box;
+    transform: translateY(-160%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    z-index: 99;
+  }
+
+  .navbar-menu-wrapper.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
   .navbar-navigation-links {
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
   }
 
   .navbar-actions {
-    gap: 16px;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    gap: 24px;
   }
 }

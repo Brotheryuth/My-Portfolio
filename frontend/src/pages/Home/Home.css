@@ -232,15 +232,24 @@ body.dark-mode .skill-svg-icon {
     font-size: 2.8rem;
   }
 
-  .skills-icon-grid div.skill-icon-card:nth-of-type(n+5) {
+  .skills-icon-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 10px 0;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .skills-icon-grid::-webkit-scrollbar {
     display: none;
   }
-}
 
-/* Small Mobile Layout (480px and below) */
-@media (max-width: 480px) {
-  .skills-icon-grid div.skill-icon-card:nth-of-type(n+4) {
-    display: none;
+  .skills-icon-grid .skill-icon-card {
+    flex: 0 0 70px;
+    width: 70px;
+    height: 70px;
   }
 }
 

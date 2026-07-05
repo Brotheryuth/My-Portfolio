@@ -18,6 +18,7 @@ function ProjectsTab({ projects, onRefresh, triggerAlert }) {
     lessonLearn: '',
     challenge: '',
     problem: '',
+    contribution: '',
     feature: false
   });
 
@@ -36,6 +37,7 @@ function ProjectsTab({ projects, onRefresh, triggerAlert }) {
       lessonLearn: '',
       challenge: '',
       problem: '',
+      contribution: '',
       feature: false
     });
   };
@@ -55,6 +57,7 @@ function ProjectsTab({ projects, onRefresh, triggerAlert }) {
         lessonLearn: project.lessonLearn || '',
         challenge: project.challenge || '',
         problem: project.problem || '',
+        contribution: project.contribution || '',
         feature: !!project.feature
       });
     } else {
@@ -209,6 +212,17 @@ function ProjectsTab({ projects, onRefresh, triggerAlert }) {
                   rows="3" 
                   value={projForm.projectDescription} 
                   onChange={(e) => setProjForm({ ...projForm, projectDescription: e.target.value })}
+                  required 
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Individual Contribution (Your Role) *</label>
+                <textarea 
+                  rows="2" 
+                  value={projForm.contribution} 
+                  onChange={(e) => setProjForm({ ...projForm, contribution: e.target.value })}
+                  placeholder="Describe your role and contribution..."
                   required 
                 />
               </div>

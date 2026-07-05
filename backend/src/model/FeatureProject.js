@@ -46,6 +46,10 @@ const featureProjectSchema =new  mongoose.Schema({
         type:String,
         trim:true
     },
+    contribution:{
+        type:String,
+        trim:true
+    },
     createAt:{
         type:Date,
         default: Date.now
